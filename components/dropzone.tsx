@@ -1,6 +1,6 @@
 'use client'
 
-import { Upload, FileText } from 'lucide-react'
+import { Upload } from 'lucide-react'
 import { useRef } from 'react'
 
 interface DropzoneProps {
@@ -41,21 +41,35 @@ export function Dropzone({ onFileSelect, disabled = false }: DropzoneProps) {
       onDragOver={handleDragOver}
       onDrop={handleDrop}
       onClick={() => !disabled && fileInputRef.current?.click()}
-      className={`relative rounded-2xl border-2 border-dashed transition-all cursor-pointer ${
+      className={`relative w-full max-w-3xl mx-auto rounded-3xl border-2 border-dashed transition-all overflow-hidden ${
         disabled
-          ? 'border-muted bg-muted/20 cursor-not-allowed opacity-50'
-          : 'border-primary/30 bg-primary/5 hover:border-primary/50 hover:bg-primary/10 active:scale-95'
+          ? 'border-accent bg-accent/5 cursor-not-allowed'
+          : 'border-primary/40 bg-primary/5 hover:border-primary/80 hover:bg-primary/10 cursor-pointer active:scale-[0.99]'
       }`}
+      style={{ minHeight: '300px' }}
     >
-      <div className="flex flex-col items-center justify-center py-16 px-6">
-        <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-          <Upload className="w-8 h-8 text-primary" strokeWidth={1.5} />
+      {/* The Horizontal Scanner Light Bar */}
+      {disabled && (
+        <div className="absolute left-0 w-full h-[4px] bg-accent blur-[2px] shadow-[0_0_15px_3px_rgba(16,185,129,0.5)] animate-scan z-10" />
+      )}
+
+      {/* Background glow if disabled (scanning) */}
+      {disabled && (
+        <div className="absolute inset-0 bg-accent/5 animate-pulse rounded-3xl" />
+      )}
+
+      <div className="absolute inset-0 flex flex-col items-center justify-center p-8 z-0">
+        <div className={`w-20 h-20 rounded-2xl flex items-center justify-center mb-6 transition-colors ${disabled ? 'bg-accent/20 text-accent' : 'bg-primary/10 text-primary'}`}>
+          <Upload className={`w-10 h-10 ${disabled ? 'animate-bounce' : ''}`} strokeWidth={1.5} />
         </div>
-        <h3 className="text-xl font-semibold text-foreground mb-2">Upload Your Resume</h3>
-        <p className="text-muted-foreground text-center max-w-sm mb-1">
-          Drag and drop your PDF resume, or click to browse
+        <h3 className="text-3xl font-semibold mb-3 tracking-tight">
+          {disabled ? 'Analyzing Intelligence...' : 'Upload Resume'}
+        </h3>
+        <p className="text-muted-foreground text-center max-w-md text-lg">
+          {disabled 
+            ? 'Extracting skills, verifying trajectory, and calculating match score.' 
+            : 'Drag and drop your PDF resume here, or click to browse.'}
         </p>
-        <p className="text-xs text-muted-foreground">PDF format • Up to 10 MB</p>
       </div>
 
       <input

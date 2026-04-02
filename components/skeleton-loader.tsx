@@ -1,75 +1,76 @@
 export function SkeletonLoader() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-      {/* Header skeleton */}
-      <div className="space-y-4">
-        <div className="h-10 bg-muted rounded-lg w-48 animate-pulse" />
-        <div className="flex gap-2">
-          <div className="h-6 bg-muted rounded w-20 animate-pulse" />
-          <div className="h-6 bg-muted rounded w-20 animate-pulse" />
+    <div className="min-h-screen bg-background text-foreground pb-20">
+      <div className="max-w-6xl mx-auto px-6 py-10">
+        
+        {/* Header Skeleton */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-6 border-b border-border/50">
+          <div className="space-y-3">
+            <div className="h-10 w-64 bg-muted animate-pulse rounded-lg" />
+            <div className="h-4 w-40 bg-muted animate-pulse rounded-md" />
+          </div>
+          <div className="h-10 w-40 bg-muted animate-pulse rounded-xl" />
         </div>
-      </div>
 
-      {/* Main content grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left column - Main info */}
-        <div className="lg:col-span-2 space-y-6">
-          {/* Profile card skeleton */}
-          <div className="card-elevated p-6 space-y-4">
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16 rounded-full bg-muted animate-pulse" />
-              <div className="space-y-2 flex-1">
-                <div className="h-6 bg-muted rounded w-32 animate-pulse" />
-                <div className="h-4 bg-muted rounded w-40 animate-pulse" />
+        {/* Dashboard Grid Skeleton */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-10">
+          
+          {/* Main Column */}
+          <div className="lg:col-span-7 xl:col-span-8 flex flex-col gap-8">
+            <section>
+              <div className="h-4 w-32 bg-muted animate-pulse rounded mb-4" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="h-20 bg-muted animate-pulse rounded-2xl" />
+                <div className="h-20 bg-muted animate-pulse rounded-2xl" />
               </div>
-            </div>
-            <div className="h-4 bg-muted rounded animate-pulse" />
-            <div className="h-4 bg-muted rounded w-5/6 animate-pulse" />
-          </div>
+            </section>
 
-          {/* Experience section skeleton */}
-          <div className="card-elevated p-6 space-y-4">
-            <div className="h-6 bg-muted rounded w-32 animate-pulse" />
-            <div className="space-y-4">
-              {[1, 2].map(i => (
-                <div key={i} className="pb-4 border-b border-border last:border-b-0 space-y-2">
-                  <div className="h-5 bg-muted rounded w-40 animate-pulse" />
-                  <div className="h-4 bg-muted rounded w-48 animate-pulse" />
-                  <div className="h-3 bg-muted rounded w-32 animate-pulse" />
+            <section className="bg-card rounded-3xl border border-border/50 p-8">
+              <div className="h-6 w-48 bg-muted animate-pulse rounded mb-6" />
+              <div className="space-y-6">
+                <div>
+                  <div className="h-4 w-24 bg-muted animate-pulse rounded mb-3" />
+                  <div className="flex gap-2">
+                    <div className="h-8 w-20 bg-muted animate-pulse rounded-full" />
+                    <div className="h-8 w-24 bg-muted animate-pulse rounded-full" />
+                    <div className="h-8 w-16 bg-muted animate-pulse rounded-full" />
+                  </div>
                 </div>
-              ))}
-            </div>
+                <div className="w-full h-px bg-border/50" />
+                <div>
+                  <div className="h-4 w-24 bg-muted animate-pulse rounded mb-3" />
+                  <div className="flex gap-2">
+                    <div className="h-6 w-16 bg-muted animate-pulse rounded-full" />
+                    <div className="h-6 w-20 bg-muted animate-pulse rounded-full" />
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
+
+          {/* Intelligence Panel Skeleton */}
+          <div className="lg:col-span-5 xl:col-span-4 flex flex-col gap-6">
+            <section className="bg-card rounded-3xl border border-border/50 p-8 h-full">
+              <div className="h-6 w-32 bg-muted animate-pulse rounded mb-6" />
+              
+              <div className="flex justify-center mb-8">
+                <div className="w-40 h-40 rounded-full border-8 border-muted animate-pulse" />
+              </div>
+
+              <div className="mb-6 space-y-4">
+                <div className="h-4 w-24 bg-muted animate-pulse rounded mb-2" />
+                <div className="h-4 w-full bg-muted animate-pulse rounded" />
+                <div className="h-4 w-5/6 bg-muted animate-pulse rounded" />
+                <div className="h-4 w-4/6 bg-muted animate-pulse rounded" />
+              </div>
+
+              <div className="mt-auto pt-6 border-t border-border/50">
+                <div className="h-24 bg-muted animate-pulse rounded-2xl" />
+              </div>
+            </section>
+          </div>
+
         </div>
-
-        {/* Right column - Sidebar */}
-        <div className="space-y-6">
-          {/* Match score skeleton */}
-          <div className="card-elevated p-6 space-y-4">
-            <div className="h-6 bg-muted rounded w-32 animate-pulse" />
-            <div className="flex justify-center">
-              <div className="w-24 h-24 rounded-full bg-muted animate-pulse" />
-            </div>
-          </div>
-
-          {/* Skills skeleton */}
-          <div className="card-elevated p-6 space-y-4">
-            <div className="h-6 bg-muted rounded w-32 animate-pulse" />
-            <div className="flex flex-wrap gap-2">
-              {[1, 2, 3, 4, 5, 6].map(i => (
-                <div key={i} className="h-8 bg-muted rounded-full w-20 animate-pulse" />
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Loading message */}
-      <div className="flex justify-center items-center gap-2 text-muted-foreground">
-        <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-        <div className="w-2 h-2 rounded-full bg-primary animate-pulse delay-100" />
-        <div className="w-2 h-2 rounded-full bg-primary animate-pulse delay-200" />
-        <span className="ml-2">Analyzing your resume...</span>
       </div>
     </div>
   )
