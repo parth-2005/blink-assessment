@@ -12,6 +12,7 @@ export default function Home() {
   const [state, setState] = useState<UIState>('idle')
   const [candidate, setCandidate] = useState<CandidateData | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [targetRole, setTargetRole] = useState('')
 
   const handleFileSelect = async (file: File) => {
     try {
@@ -21,6 +22,7 @@ export default function Home() {
       // Use FormData to allow server action support for files easily
       const formData = new FormData()
       formData.append('resume', file)
+      formData.append('targetRole', targetRole)
 
       const result = await processPDFResume(formData)
       
@@ -53,13 +55,33 @@ export default function Home() {
               <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-balance text-foreground">
                 Hire Smarter with <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">Blink Intelligence</span>
               </h1>
-              <p className="text-lg text-muted-foreground text-balance max-w-2xl mx-auto">
-                Upload a PDF resume. Our AI instantly extracts skills, verifies profiles, and calculates a match score and career trajectory.
+              <p className="text-lg text-muted-foreground text-balance max-w-2xl mx-auto mb-8">
+                Perform a Semantic Gap Analysis. Enter the role you are hiring for, then drop a candidate's resume to automatically evaluate their fit.
               </p>
+              
+              <div className="max-w-md mx-auto mb-8">
+                <label htmlFor="targetRole" className="block text-sm font-semibold text-foreground/90 mb-2 text-left">
+                  Target Role
+                </label>
+                <input
+                  suppressHydrationWarning
+                  id="targetRole"
+                  type="text"
+                  placeholder="e.g. Senior Full Stack Engineer"
+                  value={targetRole}
+                  onChange={(e) => setTargetRole(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border border-border bg-card focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                  disabled={state === 'loading'}
+                />
+              </div>
             </div>
 
             {/* Dropzone is the main interactive piece */}
-            <Dropzone onFileSelect={handleFileSelect} disabled={state === 'loading'} />
+            <Dropzone 
+               onFileSelect={handleFileSelect} 
+               disabled={state === 'loading' || targetRole.trim().length < 3} 
+               missingRole={targetRole.trim().length < 3}
+            />
 
           </div>
         </div>

@@ -16,7 +16,9 @@ export interface CandidateData {
     matchScore: number;
     strengths: string[];
     trajectory: string;
+    gapAnalysis: string[];
   };
+  targetRole?: string;
 }
 
 export interface ParseResponse {

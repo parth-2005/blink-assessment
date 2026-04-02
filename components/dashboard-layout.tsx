@@ -31,9 +31,11 @@ export function DashboardLayout({ candidate, onReset }: DashboardLayoutProps) {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-6 border-b border-border/50">
           <div>
             <h1 className="text-4xl font-extrabold tracking-tight mb-2 flex items-center gap-3">
-              {candidate.name || 'Unknown Candidate'}
+              Fit Analysis for: <span className="text-primary">{candidate.targetRole || 'Specific Role'}</span>
             </h1>
-            <div className="flex items-center gap-3 text-muted-foreground">
+            <div className="flex items-center gap-3 text-muted-foreground mt-2">
+              <span className="font-medium text-foreground text-lg">{candidate.name || 'Unknown Candidate'}</span>
+              <span>•</span>
               <span>{candidate.email !== 'Not Provided' ? candidate.email : 'No email provided'}</span>
               {candidate.email !== 'Not Provided' && (
                 <button
@@ -168,10 +170,27 @@ export function DashboardLayout({ candidate, onReset }: DashboardLayoutProps) {
                   </svg>
                   <div className="absolute inset-0 flex flex-col items-center justify-center">
                     <span className="text-4xl font-extrabold text-foreground">{matchScore}%</span>
-                    <span className="text-xs text-muted-foreground uppercase font-medium tracking-wide mt-1">Match Score</span>
+                    <span className="text-xs text-muted-foreground uppercase font-medium tracking-wide mt-1 text-center px-4 leading-tight">Role Match Confidence</span>
                   </div>
                 </div>
               </div>
+
+              {/* Gap Analysis */}
+              {candidate.analysis?.gapAnalysis && candidate.analysis.gapAnalysis.length > 0 && (
+                <div className="mb-6 p-4 rounded-2xl bg-destructive/5 border border-destructive/20 relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-destructive/10 rounded-full blur-2xl -mr-16 -mt-16 pointer-events-none" />
+                  <h3 className="text-sm font-semibold text-destructive mb-3 uppercase tracking-wide flex items-center gap-2">
+                    <Zap className="w-4 h-4 fill-destructive/20" /> Gap Analysis
+                  </h3>
+                  <div className="flex flex-wrap gap-2 relative z-10">
+                    {candidate.analysis.gapAnalysis.map((gap, idx) => (
+                      <span key={idx} className="inline-flex items-center px-3 py-1.5 rounded-md text-xs font-semibold bg-destructive/10 text-destructive border border-destructive/20">
+                        {gap}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* Key Strengths */}
               <div className="mb-6">
